@@ -12,16 +12,9 @@ export async function storeDataInRedis(
     const client = await redisService.connect();
 
     await client.hSet('participants', { value: JSON.stringify(participants) });
+      await client.hSet(`participant_availability`, { value: JSON.stringify(availability) });
+      await client.hSet(`schedules`, { value: JSON.stringify(schedules) });
 
-    for (const [key, value] of Object.entries(availability)) {
-      await client.hSet(`participant_availability`, { value: JSON.stringify(value) });
-    }
-
-    for (const [key, value] of Object.entries(schedules)) {
-      await client.hSet(`schedules`, { value: JSON.stringify(value) });
-    }
-
-    console.log('Data successfully stored in Redis!');
     return {
       success: true,
       message: 'Data successfully stored in Redis'

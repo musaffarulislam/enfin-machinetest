@@ -25,6 +25,7 @@ import {
   ): AvailabilityResult {
     const result: AvailabilityResult = {};
 
+    console.log("kjkdfjk", participants, participantAvailability, schedules, input);
     const startDate = convertToDate(input.date_range.start);
     const endDate = convertToDate(input.date_range.end);
     
@@ -55,11 +56,11 @@ import {
               return false; 
             }
     
-            const dayAvailability = availability[dayOfWeek] || [];
-            const isWeeklyAvailable = dayAvailability.some(slot => 
+            const dayAvailability = availability[dayOfWeek] ?? [];
+            const isWeeklyAvailable = dayAvailability?.some(slot => 
               convertToMinutes(start) >= convertToMinutes(slot.start) && 
               convertToMinutes(end) <= convertToMinutes(slot.end)
-            );
+            );            
     
             const scheduledMeetings = schedule?.[currentDate] || [];
             const isScheduleConflict = scheduledMeetings.some(meeting => 

@@ -1,18 +1,13 @@
 "use client"
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import SelectionField from './SelectionField'
+import { participantAvailability, participants, schedules } from '@/heplers/sampleData'
 import DateSelectorFiled from './DateSelectorFiled'
 import Button from './Button'
-import { IForm, Participant, ParticipantAvailability, Schedule } from '@/heplers/types'
+import { IForm } from '@/heplers/types'
 import { checkParticipantAvailableSlots } from '@/heplers/hepler'
-import { retrieveDataFromRedis } from '@/app/actions'
-import Loading from './Loading'
 
 const Form: FC<IForm> = ({onResultsChange}) => {
-  const [participants, setParticipants] = useState<{[key: number]: Participant}>({});
-  const [participantAvailability, setParticipantAvailability] = useState<{[key: number]: ParticipantAvailability}>({});
-  const [schedules, setSchedules] = useState<{[key: number]: Schedule}>({});
-
   const [selectedParticipants, setSelectedParticipants] = useState<number[]>([]);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -20,15 +15,13 @@ const Form: FC<IForm> = ({onResultsChange}) => {
   const [selectedError, setSelectedError] = useState<string | undefined>(undefined);
   const [startDateError, setStartDateError] = useState<string | undefined>(undefined);
   const [endDateError, setEndDateError] = useState<string | undefined>(undefined);
-
-  const [isLoading, setIsLoading] = useState(false);
-
   const data = Object.entries(participants).map(([id, details]) => ({
     id: Number(id),
     name: details?.name,
   }))
 
   const handleCheckSlots = () => {
+    console.log("Checking Slots", selectedParticipants, startDate, endDate);
     setSelectedError(undefined);
     setStartDateError(undefined); 
     setEndDateError(undefined);
@@ -67,31 +60,25 @@ const Form: FC<IForm> = ({onResultsChange}) => {
 
   return (
     <div className='w-full flex flex-col justify-center items-center gap-8'>
-      {isLoading ? (
-        <>
-          <SelectionField 
-            label='Choose Participants' 
-            data={data} 
-            onSelectionChange={setSelectedParticipants} 
-            error={selectedError}
-          />
-          <DateSelectorFiled
-            label='Start Date'
-            onDateChange={setStartDate}
-            error={startDateError}
-          />
-          <DateSelectorFiled
-            label='End Date'
-            onDateChange={setEndDate}
-            error={endDateError}
-          />
-          <Button className='min-w-96' onClick={handleCheckSlots}>
-            Check Slots
-          </Button>
-        </>
-      ) : (
-        <Loading />
-      )}
+      <SelectionField 
+        label='Choose Participants' 
+        data={data} 
+        onSelectionChange={setSelectedParticipants} 
+        error={selectedError}
+      />
+      <DateSelectorFiled
+        label='Start Date'
+        onDateChange={setStartDate}
+        error={startDateError}
+      />
+      <DateSelectorFiled
+        label='End Date'
+        onDateChange={setEndDate}
+        error={endDateError}
+      />
+      <Button className='min-w-96' onClick={handleCheckSlots}>
+        Check Slots
+      </Button>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';// Assuming these functions are in a
 import { clearRedisDatabase, retrieveDataFromRedis, storeDataInRedis } from './actions';
 import Loading from '@/components/Loading';
 import Link from 'next/link';
+import { participantAvailability, participants, schedules } from '@/heplers/sampleData';
 
 const AvailableSlotPage = () => {
   const [loading, setLoading] = useState(false);
@@ -14,12 +15,10 @@ const AvailableSlotPage = () => {
     const checkDataInRedis = async () => {
       setLoading(true);
       try {
-        // Check if the necessary data exists in Redis (check for 3 keys)
         const participants = await retrieveDataFromRedis('participants');
         const availability = await retrieveDataFromRedis('participant_availability');
         const schedules = await retrieveDataFromRedis('schedules');
 
-        console.log('Data retrieved from Redis:', participants, availability, schedules);
         if (participants.success && availability.success && schedules.success) {
           setDataExists(true);
           setStatus('Data exists in Redis');
@@ -41,10 +40,6 @@ const AvailableSlotPage = () => {
   const handleAddData = async () => {
     setLoading(true);
     try {
-      const participants = {};
-      const participantAvailability = {};
-      const schedules = {};
-
       const result = await storeDataInRedis(participants, participantAvailability, schedules);
 
       if (result.success) {

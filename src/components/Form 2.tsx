@@ -21,7 +21,6 @@ const Form: FC<IForm> = ({onResultsChange}) => {
   }))
 
   const handleCheckSlots = () => {
-    console.log("Checking Slots", selectedParticipants, startDate, endDate);
     setSelectedError(undefined);
     setStartDateError(undefined); 
     setEndDateError(undefined);
@@ -37,7 +36,6 @@ const Form: FC<IForm> = ({onResultsChange}) => {
         input
       );
 
-      console.log("Result", result);
       onResultsChange(result);
       return
     }

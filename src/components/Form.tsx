@@ -66,7 +66,6 @@ const Form: FC<IForm> = ({ onResultsChange }) => {
       };
       const result = checkParticipantAvailableSlots(participants, participantAvailability, schedules, input);
 
-      console.log('Result', result);
       onResultsChange(result);
       return;
     }

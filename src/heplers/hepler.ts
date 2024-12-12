@@ -25,7 +25,6 @@ import {
   ): AvailabilityResult {
     const result: AvailabilityResult = {};
 
-    console.log("kjkdfjk", participants, participantAvailability, schedules, input);
     const startDate = convertToDate(input.date_range.start);
     const endDate = convertToDate(input.date_range.end);
     

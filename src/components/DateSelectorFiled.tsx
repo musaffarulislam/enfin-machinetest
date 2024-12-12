@@ -29,7 +29,7 @@ const DateSelectorFiled: FC<IDatePicker> = ({ label, onDateChange, error }) => {
         disabledDate={disablePastDates}
         className="w-full mt-0 custom-datepicker border-0 !bg-primary font-semibold p-0 focus:outline-none focus:ring-transparent"
         placeholder={selectedDate ? undefined : label} 
-        format="DD/MM/YYYY" // 
+        format="DD/MM/YYYY" 
       />
     </div>
       {error && <Error message={error} />}

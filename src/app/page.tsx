@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react';// Assuming these functions are in a redisService file
+import { useState, useEffect } from 'react';
 import { clearRedisDatabase, retrieveDataFromRedis, storeDataInRedis } from './actions';
 import Loading from '@/components/Loading';
 import Link from 'next/link';

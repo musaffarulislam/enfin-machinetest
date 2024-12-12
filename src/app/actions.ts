@@ -35,18 +35,16 @@ export async function retrieveDataFromRedis(key: string) {
       const redisService = RedisService.getInstance();
       const client = await redisService.connect();
       
-      // Retrieve data from Redis and ensure it's a plain object
       const data = await client.hGetAll(key);
   
-      // Convert the retrieved data to a plain object (if necessary)
       const parsedData = Object.entries(data).reduce<Record<string, any>>((acc, [field, value]) => {
-        acc[field] = JSON.parse(value); // Assuming data was stringified when stored
+        acc[field] = JSON.parse(value); 
         return acc;
       }, {});
   
       return {
         success: true,
-        data: parsedData // Returning parsed data as a plain object
+        data: parsedData
       };
     } catch (error) {
       console.error('Redis retrieval error:', error);
@@ -63,7 +61,6 @@ export async function retrieveDataFromRedis(key: string) {
       const redisService = RedisService.getInstance();
       const client = await redisService.connect();
   
-      // Clear the entire Redis database
       await client.flushAll();
   
       console.log('Redis database cleared successfully!');

@@ -21,7 +21,7 @@ const Form: FC<IForm> = ({ onResultsChange }) => {
   const [startDateError, setStartDateError] = useState<string | undefined>(undefined);
   const [endDateError, setEndDateError] = useState<string | undefined>(undefined);
 
-  const [isLoading, setIsLoading] = useState(true); // Default to true while loading
+  const [isLoading, setIsLoading] = useState(true); 
 
   const data = Object.entries(participants).map(([id, details]) => ({
     id: Number(id),

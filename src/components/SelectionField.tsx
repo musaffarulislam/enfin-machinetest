@@ -43,7 +43,7 @@ const SelectionField: FC<ISelectionField> = ({
       </div>
       {selectionDropdown && (
         <div className='w-full mt-4 bg-primary p-4 flex flex-col'>
-          {data.map((details) => (
+          {data.length > 0 ? ( data.map((details) => (
             <div key={details.id} className='flex items-center gap-4 mb-3'>
               <label className='flex items-center cursor-pointer'>
                 <input
@@ -81,8 +81,12 @@ const SelectionField: FC<ISelectionField> = ({
                 </span>
                 <span className='text-base'>{details.name}</span>
               </label>
+            </div>  
+          ))) : (
+            <div className='flex items-center justify-center text-red-500'>
+              <span className='text-base'>No data available</span>
             </div>
-          ))}
+          )}
         </div>
       )}
       {error && <Error message={error} />}

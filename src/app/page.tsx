@@ -19,7 +19,8 @@ const AvailableSlotPage = () => {
         const availability = await retrieveDataFromRedis('participant_availability');
         const schedules = await retrieveDataFromRedis('schedules');
 
-        if (participants.success && availability.success && schedules.success) {
+        if (Object.keys(participants?.data ?? {}).length > 0 && Object.keys(availability?.data ?? {}).length > 0 && Object.keys(schedules?.data ?? {}).length > 0) {
+          console.log("Data exists in Redis");
           setDataExists(true);
           setStatus('Data exists in Redis');
         } else {

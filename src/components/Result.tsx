@@ -4,7 +4,7 @@ import { IAvailableSlot } from '@/heplers/types'
 const Result: FC<IAvailableSlot> = ({results}) => {
   return (
     <div className='w-full mt-4 flex flex-col gap-4'>
-        {Object.entries(results).map(([date, slots]) => {
+        {Object.entries(results ?? {}).map(([date, slots]) => {
             return (
                 <div key={date} className='flex  items-center gap-4'>
                     <div className='text-xl'>{date}</div>

@@ -4,7 +4,6 @@ import {
     Schedule, 
     CheckAvailabilityInput, 
     AvailabilityResult, 
-    TimeSlot
   } from './types';
 
   const convertToDate = (dateString: string): Date => {
